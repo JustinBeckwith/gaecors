@@ -1,20 +1,46 @@
 <html>
   <body>
     <h1>trying it out!</h1>
+    <button onclick="tryGet()">Try Get</button>
+    <button onclick="tryPost()">Try Post</button>
     <pre id="results">
       no results yet...
     </pre>
     <script>
-      let url = 'https://el-gato.appspot-preview.com/data';
-      fetch(url).then(response => {
-        return response.json();
-      }).then(results => {
-        let res = JSON.stringify(results);
-        document.getElementById('results').innerText = res;
-      }).catch(err => {
-        console.error(err);
-        document.getElementById('results').innerText = err;
-      });
+      let resBox = document.getElementById('results');
+      
+      function tryGet() {
+        let url = 'https://el-gato.appspot-preview.com/data';
+        fetch(url).then(response => {
+          return response.json();
+        }).then(results => {
+          let res = JSON.stringify(results);
+          resBox.innerText = res;
+        }).catch(err => {
+          console.error(err);
+          resBox.innerText = err;
+        });
+      }
+
+      function tryPost() {
+        //let url = 'https://el-gato.appspot-preview.com/products/foobear';
+        let url = 'http://localhost:3000/products/foobear';
+        
+        let data = new FormData();
+        data.append("name", "Joe");
+
+        fetch(url, {
+          method: "POST",
+          body: data
+        }).then(response => {
+          console.log(response);
+          resBox.innerText = response.status;
+        }).catch(err => {
+          console.error(err);
+          resBox.innerText = err;
+        });
+      }
+
     </script>
   </body>
 </html>
