@@ -9,6 +9,10 @@ app.get('/data', (req, res) => {
   res.json({msg: 'This is CORS-enabled for all origins!'});
 });
 
+app.get('/_ah/health', (req, res) => {
+  res.sendStatus(200);
+});
+
 app.get('/tryit', (req, res) => {
   res.sendFile(path.join(__dirname, 'tryit.html'));
 });
