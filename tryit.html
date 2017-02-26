@@ -1,0 +1,20 @@
+<html>
+  <body>
+    <h1>trying it out!</h1>
+    <pre id="results">
+      no results yet...
+    </pre>
+    <script>
+      let url = 'https://el-gato.appspot-preview.com/data';
+      fetch(url).then(response => {
+        return response.json();
+      }).then(results => {
+        let res = JSON.stringify(results);
+        document.getElementById('results').innerText = res;
+      }).catch(err => {
+        console.error(err);
+        document.getElementById('results').innerText = err;
+      });
+    </script>
+  </body>
+</html>
